@@ -1,4 +1,4 @@
-package com.shadow.zyw.sdu.chapter1;
+package com.shadow.zyw.sdu.chapter02;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
