@@ -3,13 +3,11 @@
     android:orientation="vertical">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="@string/hello_world"
-        android:id="@+id/toast_tv"/>
+        android:text="view intent"
+        android:id="@+id/view_intent_tv"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/toastId"
-        android:text="toast"/>
-
+        android:id="@+id/view_intent_btn"/>
 
 </LinearLayout>

@@ -1,15 +1,33 @@
 package com.shadow.zyw.sdu.chapter02;
 
+import android.animation.IntEvaluator;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class ToastActivity extends ActionBarActivity {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                String datas = data.getStringExtra("text");
+                Log.v("text", datas);
+                TextView tv = (TextView) findViewById(R.id.toast_tv);
+                tv.setText(datas);
+            }
+        }
+    }
+
     private Button btn;
 
 
@@ -23,6 +41,19 @@ public class ToastActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ToastActivity.this, "lalalla", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ToastActivity.this, IntentViewActivity.class);
+                intent.putExtra("intent", "sdfsf");
+//                Intent intent = new Intent("intent_test");
+//                intent.addCategory("intent_test_category");
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse("http://www.baidu.com"));
+//                Intent intent = new Intent(Intent.ACTION_DIAL);
+//                intent.setData(Uri.parse("tel:10086"));
+
+//                startActivity(intent);
+                startActivityForResult(intent,1);
+
+
             }
         });
     }
