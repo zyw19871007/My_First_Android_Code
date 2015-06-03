@@ -2,7 +2,52 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="hello_world chapter03"
+        android:id="@+id/main_textv"
+        android:textSize="33dp"
+        android:textColor="#00f"
+        android:gravity="center"
+
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_et"
+        android:background="#0f0"
+        android:textSize="30dp"
+        android:hint="请输入"
+        android:maxLines="3"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btn"
+        android:id="@+id/main_btn"
+        android:gravity="center"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_imagev"
+        android:src="@mipmap/ic_launcher"
+        />
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+
+
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_btn2"
+        android:text="btn2"
+
+        />
+
 
 </LinearLayout>
