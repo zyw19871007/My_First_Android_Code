@@ -15,6 +15,16 @@ import android.widget.Toast;
 
 
 public class ToastActivity extends ActionBarActivity {
+    private Button btn;
+    static ToastActivity toastActivity;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String stemp = "save_str";
+        outState.putString("save",stemp);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -28,14 +38,15 @@ public class ToastActivity extends ActionBarActivity {
         }
     }
 
-    private Button btn;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_toast);
+        toastActivity = this;
+        if (savedInstanceState != null) {
+            Log.d("text", savedInstanceState.getString("save"));
+        }
+        Log.e("text", getClass().getSimpleName());
         btn = (Button) findViewById(R.id.toastId);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

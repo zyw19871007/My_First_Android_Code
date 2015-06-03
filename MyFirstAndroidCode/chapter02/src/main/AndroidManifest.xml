@@ -30,7 +30,8 @@
         </activity>
         <activity
             android:name=".IntentViewActivity"
-            android:label="@string/title_activity_intent_view">
+            android:label="@string/title_activity_intent_view"
+            android:launchMode="standard">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.DIAL" />

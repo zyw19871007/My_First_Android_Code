@@ -1,5 +1,6 @@
 package com.shadow.zyw.sdu.chapter02;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class IntentViewActivity extends ActionBarActivity {
 
             }
         });
+
     }
 
     @Override
@@ -66,5 +68,10 @@ public class IntentViewActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
