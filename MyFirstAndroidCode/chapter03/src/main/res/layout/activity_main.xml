@@ -48,6 +48,13 @@
         android:text="btn2"
 
         />
+    <com.shadow.zyw.sdu.chapter03.customize_layout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    </com.shadow.zyw.sdu.chapter03.customize_layout>
 
 
 </LinearLayout>
