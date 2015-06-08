@@ -6,28 +6,28 @@
 
     <LinearLayout
         android:id="@+id/left_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_parent"
+        android:layout_height="wrap_parent"
         android:layout_gravity="left"
         android:background="@mipmap/message_left">
 
         <TextView
             android:id="@+id/left_tv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_parent"
+            android:layout_height="wrap_parent" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/right_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_parent"
+        android:layout_height="wrap_parent"
         android:layout_gravity="right"
         android:background="@mipmap/message_right">
 
         <TextView
             android:id="@+id/right_tv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_parent"
+            android:layout_height="wrap_parent" />
     </LinearLayout>
 
 </LinearLayout>
