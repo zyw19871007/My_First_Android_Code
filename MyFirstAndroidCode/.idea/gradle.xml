@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/chapter03" />
             <option value="$PROJECT_DIR$/chapter03listview" />
             <option value="$PROJECT_DIR$/chapter03msg" />
+            <option value="$PROJECT_DIR$/chapter04fragment" />
           </set>
         </option>
       </GradleProjectSettings>
