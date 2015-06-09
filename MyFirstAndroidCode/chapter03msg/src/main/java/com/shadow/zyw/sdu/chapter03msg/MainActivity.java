@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String data[] = {"a", "a1", "f", "b", "c", "sfa", "xvx",};
-        Msg msg = new Msg("a",Msg.RECEIVE);
+        Msg msg = new Msg("a", Msg.RECEIVE);
         list.add(msg);
         msg = new Msg("b", Msg.SEND);
         list.add(msg);
@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
         msg = new Msg("kjga", Msg.RECEIVE);
         list.add(msg);
         listView = (ListView) findViewById(R.id.listview);
-        msgAdapter = new MsgAdapter(this, R.layout.list_item,list);
+        msgAdapter = new MsgAdapter(this, R.layout.list_item, list);
         listView.setAdapter(msgAdapter);
 
         editText = (EditText) findViewById(R.id.msg_edit);
@@ -45,11 +45,27 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String str = String.valueOf(editText.getText());
-                Msg msg1 = new Msg(str,Msg.SEND);
+                editText.setText("");
+                Msg msg1 = new Msg(str, Msg.SEND);
                 list.add(msg1);
                 msgAdapter.notifyDataSetChanged();
-                editText.setText("");
-                listView.setSelection(list.size());
+                listView.setSelection(list.size() - 1);
+
+//                //method 1
+//                listView.requestFocusFromTouch();
+//                listView.setSelection(list.size() - 1);
+//                editText.requestFocus();
+//                //method 1
+                //method 2
+//                listView.smoothScrollToPosition(list.size()-1);
+                //method 2
+                //method 3
+                listView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        listView.setSelection(list.size()-1);
+                    }
+                });
 
             }
         });
