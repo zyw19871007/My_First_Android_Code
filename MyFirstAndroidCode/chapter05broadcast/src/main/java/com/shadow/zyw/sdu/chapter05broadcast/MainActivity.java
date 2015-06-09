@@ -1,17 +1,38 @@
 package com.shadow.zyw.sdu.chapter05broadcast;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+    private IntentFilter intentFilter;
+    private NetworkChangeReceiver networkChangeReceiver;
+
+    class NetworkChangeReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(context, "lalalall",Toast.LENGTH_SHORT).show();
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intentFilter = new IntentFilter();
+        networkChangeReceiver = new NetworkChangeReceiver();
+        intentFilter.addAction("network_change");
+        registerReceiver(networkChangeReceiver, intentFilter);
+
     }
 
     @Override
@@ -19,6 +40,12 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkChangeReceiver);
     }
 
     @Override
