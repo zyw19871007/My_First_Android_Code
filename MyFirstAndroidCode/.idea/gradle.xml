@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/chapter03msg" />
             <option value="$PROJECT_DIR$/chapter04fragment" />
             <option value="$PROJECT_DIR$/chapter05broadcast" />
+            <option value="$PROJECT_DIR$/chapter05forcelogoff" />
           </set>
         </option>
       </GradleProjectSettings>
