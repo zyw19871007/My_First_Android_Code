@@ -77,7 +77,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         editText = (EditText) findViewById(R.id.main_edit);
         editText.setText(load("data"));
-        Log.e("test", String.valueOf(TextUtils.isEmpty(load("data"))));
     }
 
     @Override
