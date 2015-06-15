@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_notice_view">NoticeViewActivity</string>
+    <string name="title_activity_msg">MsgActivity</string>
 </resources>

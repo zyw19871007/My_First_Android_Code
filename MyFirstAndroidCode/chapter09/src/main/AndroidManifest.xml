@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shadow.zyw.sdu.chapter08" >
+    package="com.shadow.zyw.sdu.chapter09" >
 
     <application
         android:allowBackup="true"
@@ -15,14 +15,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".NoticeViewActivity"
-            android:label="@string/title_activity_notice_view" >
-        </activity>
-        <activity
-            android:name=".MsgActivity"
-            android:label="@string/title_activity_msg" >
         </activity>
     </application>
 

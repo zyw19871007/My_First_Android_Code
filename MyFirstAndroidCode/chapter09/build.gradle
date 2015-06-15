@@ -5,8 +5,8 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.shadow.zyw.sdu.chapter08"
-        minSdkVersion 16
+        applicationId "com.shadow.zyw.sdu.chapter09"
+        minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
