@@ -18,16 +18,22 @@ public class MyDataBaseHelper extends SQLiteOpenHelper{
     }
 
     private static final String create_book = "create table book(id integer primary key autoincrement,author text,price real,pages integer,name text)";
+    private static final String create_category = "create table category(id integer primary key autoincrement,category_name text,category_code integer)";
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(create_book);
+        db.execSQL(create_category);
         Toast.makeText(myContext, "create book",Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("drop table  if exists book");
+        db.execSQL("drop table  if exists category");
+        onCreate(db);
 
     }
 }

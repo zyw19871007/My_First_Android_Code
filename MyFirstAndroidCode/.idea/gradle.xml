@@ -20,6 +20,8 @@
             <option value="$PROJECT_DIR$/chapter05forcelogoff" />
             <option value="$PROJECT_DIR$/chapter06" />
             <option value="$PROJECT_DIR$/chapter06sqlite" />
+            <option value="$PROJECT_DIR$/chapter07content" />
+            <option value="$PROJECT_DIR$/chapter08" />
           </set>
         </option>
       </GradleProjectSettings>
