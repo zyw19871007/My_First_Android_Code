@@ -4,5 +4,30 @@
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+    <Button
+        android:id="@+id/service_start"
+        android:text="start service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/service_stop"
+        android:text="stop service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/service_bind"
+        android:text="bind service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/service_unbind"
+        android:text="unbind service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/intent_service"
+        android:text="intent service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
