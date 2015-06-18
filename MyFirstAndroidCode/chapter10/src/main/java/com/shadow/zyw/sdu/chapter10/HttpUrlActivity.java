@@ -4,11 +4,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,6 +20,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,6 +31,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 
 public class HttpUrlActivity extends ActionBarActivity {
@@ -50,7 +58,23 @@ public class HttpUrlActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 //                sendWithHttpUrl();
-                sendWithHttpClient();
+//                sendWithHttpClient();
+                String address = "http://172.20.32.95:8090/ytjyc/get_data.json";
+                HttpUtil.sendHttpRequest(address, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String repo) {
+                        Log.d("test", "callback on finish" + repo);
+                        Message msg = new Message();
+                        msg.what = SHOW_RESPONSE;
+                        msg.obj = repo;
+                        handler.sendMessage(msg);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
             }
         });
     }
@@ -91,7 +115,7 @@ public class HttpUrlActivity extends ActionBarActivity {
             public void run() {
                 HttpURLConnection httpURLConnection = null;
                 try {
-                    URL url = new URL("http://www.baidu.com");
+                    URL url = new URL("http://172.20.32.95:8090/ytjyc/get_data.json");
                     httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("GET");
                     httpURLConnection.setConnectTimeout(8000);
@@ -103,6 +127,8 @@ public class HttpUrlActivity extends ActionBarActivity {
                     while ((line = bufferedReader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
+                    parseJsonWithJsonObject(stringBuilder.toString());
+                    parseJsonWithGson(stringBuilder.toString());
                     Message msg = new Message();
                     msg.what = SHOW_RESPONSE;
                     msg.obj=stringBuilder.toString();
@@ -120,6 +146,34 @@ public class HttpUrlActivity extends ActionBarActivity {
 
             }
         }).start();
+    }
+
+    private void parseJsonWithGson(String s) {
+        Gson gson = new Gson();
+        List<JsonOb> list = gson.fromJson(s, new TypeToken<List<JsonOb>>() {
+        }.getType());
+        for (JsonOb jsonOb : list) {
+            Log.d("test", jsonOb.getId());
+            Log.d("test", jsonOb.getName());
+            Log.d("test", jsonOb.getVersion());
+        }
+
+
+    }
+
+    private void parseJsonWithJsonObject(String stringBuilder) {
+        try {
+            JSONArray jsonArray = new JSONArray(stringBuilder);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String id = jsonObject.getString("id");
+                Log.d("test", id);
+            }
+            
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
