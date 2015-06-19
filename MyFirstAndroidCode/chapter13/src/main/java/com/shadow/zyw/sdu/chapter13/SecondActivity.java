@@ -1,36 +1,31 @@
 package com.shadow.zyw.sdu.chapter13;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity {
+public class SecondActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toast.makeText(MyApplication.getContext(),"afdaf",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, SecondActivity.class);
-        Person person = new Person();
-        person.setAge(12);
-        person.setName("shadow");
-        PersonParcel personParcel = new PersonParcel();
-        personParcel.setName("bajie");
-        personParcel.setAge(333);
-        intent.putExtra("data", person);
-        intent.putExtra("data_parcel", personParcel);
-        startActivity(intent);
+        setContentView(R.layout.activity_second);
+        Person person = (Person) getIntent().getSerializableExtra("data");
+        Log.d("test", person.getName());
+        Log.d("test", String.valueOf(person.getAge()));
+        PersonParcel personParcel = (PersonParcel) getIntent().getParcelableExtra("data_parcel");
+        Log.d("test", personParcel.getName());
+        Log.d("test", String.valueOf(personParcel.getAge()));
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_second, menu);
         return true;
     }
 
