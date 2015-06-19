@@ -19,6 +19,7 @@
       <module fileurl="file://$PROJECT_DIR$/chapter09timerservice/chapter09timerservice.iml" filepath="$PROJECT_DIR$/chapter09timerservice/chapter09timerservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/chapter10/chapter10.iml" filepath="$PROJECT_DIR$/chapter10/chapter10.iml" />
       <module fileurl="file://$PROJECT_DIR$/chapter11/chapter11.iml" filepath="$PROJECT_DIR$/chapter11/chapter11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter13/chapter13.iml" filepath="$PROJECT_DIR$/chapter13/chapter13.iml" />
     </modules>
   </component>
 </project>
