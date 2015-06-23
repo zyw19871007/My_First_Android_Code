@@ -5,10 +5,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,10 @@ public class MainActivity extends ActionBarActivity {
         personParcel.setAge(333);
         intent.putExtra("data", person);
         intent.putExtra("data_parcel", personParcel);
-        startActivity(intent);
+//        startActivity(intent);
+        textView = (TextView) findViewById(R.id.test_name);
+        textView.setText("test test test");
+
     }
 
     @Override

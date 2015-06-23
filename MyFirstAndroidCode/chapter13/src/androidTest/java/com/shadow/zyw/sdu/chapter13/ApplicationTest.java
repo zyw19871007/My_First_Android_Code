@@ -11,7 +11,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
-    public void tttestAdd() {
+    public void testAdd() {
         assertEquals(2,3);
 
     }
