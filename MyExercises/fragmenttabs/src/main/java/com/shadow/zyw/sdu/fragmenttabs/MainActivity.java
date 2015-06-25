@@ -4,8 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.renderscript.Sampler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,19 +18,21 @@ import java.util.Map;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
-
-    String btns[] = {"message", "contacts", "news", "setting"};
+    Fragment fragment;
+    FragInterface fragInterface;
+    String tabs[] = {"message", "contacts", "news", "setting"};
     private Map<String, String> map = new HashMap<>();
     private FragmentManager fragmentManager;
+    private FragObject fragObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getFragmentManager();
-        for (int i = 0; i < btns.length; i++) {
-            View view = findView(btns[i] + "_layout", "id");
-            map.put(String.valueOf(view.getId()), btns[i]);
+        for (int i = 0; i < tabs.length; i++) {
+            View view = findView(tabs[i] + "_layout", "id");
+            map.put(String.valueOf(view.getId()), tabs[i]);
             view.setOnClickListener(this);
         }
     }
@@ -65,25 +65,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Log.d("test", String.valueOf(v.getId()));
         String name = map.get(String.valueOf(v.getId()));
         Log.d("test", "name" + name);
-        Fragment fragment;
+
+        fragObject = new FragObject();
+        fragObject.setXml(name + "_layout");
         try {
             fragment = (Fragment) newInstance(name + "Frag");
+            fragInterface = (FragInterface) newInstance(name + "Frag");
+
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("test", "cannot create class:" + name);
             return;
         }
         ImageView imageView = (ImageView) findView(name + "_image", "id");
-        int resid = findView(name + "_selected", "mipmap").getId();
-        imageView.setImageResource(Integer.valueOf(resid));
+        imageView.setImageResource(findImage(name + "_selected"));
         TextView textView = (TextView) findView(name + "_text", "id");
         textView.setTextColor(Color.WHITE);
+
         fragmentTransaction.add(R.id.content, fragment);
-        if (fragment == null) {
-
-        }
-//        imageView.setImageResource(findImage(name+"_selected"));
-
+//        fragmentTransaction.add(R.id.content, fragObject);
+        fragmentTransaction.commit();
 
     }
 
@@ -101,6 +102,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private View findView(String name, String type) {
         int resId = getResources().getIdentifier(name, type, "com.shadow.zyw.sdu.fragmenttabs");
+        Log.d("test", "find view:" + name + resId);
         View view = (View) findViewById(resId);
         return view;
     }
@@ -110,8 +112,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
         className = sb.toString();
         Log.d("test", "classname:" + className);
-        Class clazz = Class.forName(className);
-
+        Class clazz = Class.forName("com.shadow.zyw.sdu.fragmenttabs." + className);
         return clazz.newInstance();
 
     }

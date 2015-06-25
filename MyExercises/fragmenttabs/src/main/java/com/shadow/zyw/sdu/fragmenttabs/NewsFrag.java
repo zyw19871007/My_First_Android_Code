@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * Created by shadow on 2015/6/24.
  */
-public class NewsFrag extends Fragment{
+public class NewsFrag extends Fragment implements  FragInterface{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
