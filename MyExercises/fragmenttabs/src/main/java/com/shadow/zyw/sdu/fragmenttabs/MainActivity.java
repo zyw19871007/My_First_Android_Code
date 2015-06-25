@@ -22,20 +22,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     FragInterface fragInterface;
     String tabs[] = {"message", "contacts", "news", "setting"};
     private Map<String, String> map = new HashMap<>();
+    private Map<String, Fragment> fragmentMap = new HashMap<>();
     private FragmentManager fragmentManager;
     private FragObject fragObject;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        fragmentManager = getFragmentManager();
-        for (int i = 0; i < tabs.length; i++) {
-            View view = findView(tabs[i] + "_layout", "id");
-            map.put(String.valueOf(view.getId()), tabs[i]);
-            view.setOnClickListener(this);
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,34 +49,69 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        fragmentManager = getFragmentManager();
+        for (int i = 0; i < tabs.length; i++) {
+            View view = findView(tabs[i] + "_layout", "id");
+            map.put(String.valueOf(view.getId()), tabs[i]);
+            view.setOnClickListener(this);
+        }
+        setSelected(tabs[0]);
+    }
 
     @Override
     public void onClick(View v) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Log.d("test", String.valueOf(v.getId()));
         String name = map.get(String.valueOf(v.getId()));
         Log.d("test", "name" + name);
 
-        fragObject = new FragObject();
-        fragObject.setXml(name + "_layout");
-        try {
-            fragment = (Fragment) newInstance(name + "Frag");
-            fragInterface = (FragInterface) newInstance(name + "Frag");
+        clearSelected();
+        setSelected(name);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("test", "cannot create class:" + name);
-            return;
+    }
+
+    private void clearSelected() {
+        for (int i = 0; i < tabs.length; i++) {
+            ImageView imageView = (ImageView) findView(tabs[i] + "_image", "id");
+            imageView.setImageResource(findImage(tabs[i] + "_unselected"));
+            TextView textView = (TextView) findView(tabs[i] + "_text", "id");
+            textView.setTextColor(Color.parseColor("#82858b"));
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            if (fragmentMap.get(tabs[i]) != null) {
+                fragmentTransaction.hide(fragmentMap.get(tabs[i]));
+            }
+
+            fragmentTransaction.commit();
+
         }
+    }
+
+    private void setSelected(String name) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (fragmentMap.get(name) == null) {
+            try {
+                fragment = (Fragment) newInstance(name + "Frag");
+                fragInterface = (FragInterface) newInstance(name + "Frag");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("test", "cannot create class:" + name);
+                return;
+            }
+            fragmentMap.put(name, fragment);
+            fragmentTransaction.add(R.id.content, fragment);
+        } else {
+            fragment = fragmentMap.get(name);
+            fragmentTransaction.show(fragment);
+        }
+        fragmentTransaction.commit();
         ImageView imageView = (ImageView) findView(name + "_image", "id");
         imageView.setImageResource(findImage(name + "_selected"));
         TextView textView = (TextView) findView(name + "_text", "id");
         textView.setTextColor(Color.WHITE);
-
-        fragmentTransaction.add(R.id.content, fragment);
-//        fragmentTransaction.add(R.id.content, fragObject);
-        fragmentTransaction.commit();
-
     }
 
     private Integer findImage(String name) {
