@@ -1,0 +1,1 @@
+include ':activitylifetime', ':fragments', ':fragmentmobilepad', ':fragmenttabs', ':viewtest'
